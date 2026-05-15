@@ -1,4 +1,4 @@
-# Overlock Studio Composer for VSCode
+# Overlock Studio Composer
 
 > Visual, node-based editor for configuration files, right inside VS Code.
 

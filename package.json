@@ -1,6 +1,6 @@
 {
   "name": "overlock-studio-composer-vsce",
-  "displayName": "Overlock Studio Composer for VSCode",
+  "displayName": "Overlock Studio Composer",
   "description": "Visual editor for configurations",
   "version": "0.1.0",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "Visualization",
     "Other"
   ],
+  "icon": "assets/icon.png",
   "main": "./dist/extension.js",
   "workspaces": [
     "composer"
