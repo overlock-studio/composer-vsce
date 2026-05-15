@@ -4158,9 +4158,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"overlock-composer-vscode@workspace:.":
+"overlock-studio-composer-vsce@workspace:.":
   version: 0.0.0-use.local
-  resolution: "overlock-composer-vscode@workspace:."
+  resolution: "overlock-studio-composer-vsce@workspace:."
   dependencies:
     "@overlock-studio/composer": "workspace:*"
     "@types/node": "npm:24.2.1"
