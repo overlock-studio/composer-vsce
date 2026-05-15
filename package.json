@@ -95,10 +95,12 @@
     "build": "node esbuild.config.mjs && tailwindcss -i src/webview/index.css -o dist/webview.css --minify",
     "watch": "node esbuild.config.mjs --watch",
     "package": "vsce package --no-dependencies",
+    "lint": "prettier --check src",
+    "typecheck": "tsc --noEmit",
     "vscode:prepublish": "yarn build"
   },
   "dependencies": {
-    "@overlock-studio/composer": "^0.1.3",
+    "@overlock-studio/composer": "^0.1.4",
     "@xyflow/react": "^12.10.0",
     "react": "19.0.0",
     "react-dom": "19.0.0"
