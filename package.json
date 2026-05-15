@@ -5,7 +5,10 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
-  "publisher": "overlock",
+  "publisher": "OverlockStudio",
+  "repository": {
+    "url": "https://github.com/overlock-studio/composer-vsce"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
