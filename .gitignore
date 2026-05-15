@@ -4,9 +4,6 @@ out
 *.vsix
 *.tsbuildinfo
 
-# Local workspace symlink to ../composer (see README "Develop")
-/composer
-
 .DS_Store
 Thumbs.db
 .yarn/

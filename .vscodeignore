@@ -2,8 +2,6 @@
 src/**
 tests/**
 node_modules/**
-composer
-composer/**
 esbuild.config.mjs
 postcss.config.js
 tailwind.config.ts
