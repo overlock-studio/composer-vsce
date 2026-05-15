@@ -1,0 +1,40 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xclusters.example.org
+spec:
+  group: example.org
+  names:
+    kind: XCluster
+    plural: xclusters
+  claimNames:
+    kind: Cluster
+    plural: clusters
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - region
+              properties:
+                region:
+                  type: string
+                  description: GCP region for the cluster
+                nodeCount:
+                  type: integer
+                  default: 1
+                net:
+                  type: boolean
+            status:
+              type: object
+              properties:
+                endpoint:
+                  type: string
+                out2:
+                  type: string

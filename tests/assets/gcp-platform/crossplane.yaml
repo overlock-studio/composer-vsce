@@ -1,0 +1,16 @@
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: gcp-sample-platform
+spec:
+  crossplane:
+    version: '>=v1.14.0'
+  dependsOn:
+    - provider: xpkg.upbound.io/upbound/provider-gcp-compute
+      version: v1.7.0
+    - provider: xpkg.upbound.io/upbound/provider-gcp-container
+      version: v1.7.0
+    - provider: xpkg.upbound.io/upbound/provider-gcp-storage
+      version: v1.7.0
+    - function: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform
+      version: v0.7.0

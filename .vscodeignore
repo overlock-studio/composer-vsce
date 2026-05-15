@@ -1,0 +1,17 @@
+.vscode/**
+src/**
+tests/**
+node_modules/**
+composer
+composer/**
+esbuild.config.mjs
+postcss.config.js
+tailwind.config.ts
+tsconfig.json
+.gitignore
+.vscodeignore
+.prettierignore
+.prettierrc
+.yarnrc.yml
+.yarn/**
+yarn.lock

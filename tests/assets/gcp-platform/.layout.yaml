@@ -1,0 +1,31 @@
+compositions:
+  gcp-cluster:
+    _self:
+      x: -244
+      y: -512
+      width: 671
+      height: 813
+    network:
+      x: 187
+      y: 76
+    address:
+      x: 226
+      y: 231
+    cluster:
+      x: 200
+      y: 373
+    bucketiammember1:
+      x: 198
+      y: 639
+  gcp-storage-vm:
+    _self:
+      x: 665
+      y: -446
+      width: 500
+      height: 410
+    bucket:
+      x: 100
+      y: 72
+    vm:
+      x: 132
+      y: 208

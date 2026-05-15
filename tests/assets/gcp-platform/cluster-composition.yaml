@@ -1,0 +1,69 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: gcp-cluster
+spec:
+  compositeTypeRef:
+    apiVersion: example.org/v1alpha1
+    kind: XCluster
+  mode: Pipeline
+  pipeline:
+    - step: patch-and-transform
+      functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: network
+            base:
+              apiVersion: compute.gcp.upbound.io/v1beta1
+              kind: Network
+              spec:
+                forProvider:
+                  autoCreateSubnetworks: false
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.net
+                toFieldPath: spec.forProvider.autoCreateSubnetworks
+              - type: ToCompositeFieldPath
+                fromFieldPath: status.atProvider.id
+                toFieldPath: status.out2
+          - name: address
+            base:
+              apiVersion: compute.gcp.upbound.io/v1beta1
+              kind: Address
+              spec:
+                forProvider:
+                  addressType: EXTERNAL
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.region
+                toFieldPath: spec.forProvider.region
+          - name: cluster
+            base:
+              apiVersion: container.gcp.upbound.io/v1beta1
+              kind: Cluster
+              spec:
+                forProvider:
+                  initialNodeCount: 1
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.region
+                toFieldPath: spec.forProvider.location
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.nodeCount
+                toFieldPath: spec.forProvider.initialNodeCount
+              - type: ToCompositeFieldPath
+                fromFieldPath: status.atProvider.endpoint
+                toFieldPath: status.endpoint
+          - name: bucketiammember1
+            base:
+              apiVersion: storage.gcp.upbound.io/v1beta1
+              kind: BucketIAMMember
+              spec:
+                forProvider: {}
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.net
+                toFieldPath: spec.forProvider

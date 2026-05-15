@@ -1,0 +1,124 @@
+{
+  "name": "overlock-studio-composer-vsce",
+  "displayName": "Overlock Studio Composer for VSCode",
+  "description": "Visual editor for configurations",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "publisher": "overlock",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "workspaces": [
+    "composer"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "overlock.composer",
+        "displayName": "Overlock Studio Composer",
+        "selector": [
+          {
+            "filenamePattern": "crossplane.yaml"
+          },
+          {
+            "filenamePattern": "crossplane.yml"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "overlock.openVisualEditor",
+        "title": "Open in Visual Editor",
+        "category": "Overlock Studio Composer"
+      },
+      {
+        "command": "overlock.saveLayout",
+        "title": "Save Layout",
+        "category": "Overlock Studio Composer"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "overlock.saveLayout",
+        "key": "ctrl+s",
+        "mac": "cmd+s",
+        "when": "activeCustomEditorId == 'overlock.composer'"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "overlock.openVisualEditor",
+          "when": "resourceFilename == crossplane.yaml || resourceFilename == crossplane.yml",
+          "group": "navigation@10"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "overlock.openVisualEditor",
+          "when": "resourceFilename == crossplane.yaml || resourceFilename == crossplane.yml",
+          "group": "navigation@10"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "overlock.openVisualEditor",
+          "when": "resourceFilename == crossplane.yaml || resourceFilename == crossplane.yml",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "overlock.openVisualEditor",
+          "when": "resourceFilename == crossplane.yaml || resourceFilename == crossplane.yml"
+        },
+        {
+          "command": "overlock.saveLayout",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.config.mjs && tailwindcss -i src/webview/index.css -o dist/webview.css --minify",
+    "watch": "node esbuild.config.mjs --watch",
+    "package": "vsce package --no-dependencies",
+    "vscode:prepublish": "yarn build"
+  },
+  "dependencies": {
+    "@overlock-studio/composer": "workspace:*",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.2.1",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.0.2",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "autoprefixer": "10.4.13",
+    "esbuild": "^0.24.0",
+    "postcss": "^8",
+    "postcss-import": "^16.1.0",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "5.6.3"
+  },
+  "overrides": {
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.0.2"
+  },
+  "packageManager": "yarn@4.4.1"
+}

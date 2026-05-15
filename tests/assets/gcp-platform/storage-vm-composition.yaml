@@ -1,0 +1,51 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: gcp-storage-vm
+spec:
+  compositeTypeRef:
+    apiVersion: example.org/v1alpha1
+    kind: XAppEnv
+  resources:
+    - name: bucket
+      base:
+        apiVersion: storage.gcp.upbound.io/v1beta1
+        kind: Bucket
+        spec:
+          forProvider:
+            forceDestroy: true
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.bucketLocation
+          toFieldPath: spec.forProvider.location
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.url
+          toFieldPath: status.bucketUrl
+    - name: vm
+      base:
+        apiVersion: compute.gcp.upbound.io/v1beta1
+        kind: Instance
+        spec:
+          forProvider:
+            bootDisk:
+              - initializeParams:
+                  - image: debian-cloud/debian-12
+            networkInterface:
+              - network: default
+                accessConfig:
+                  - {}
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.zone
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-a"
+            - type: math
+              math:
+                type: clampMin
+                clampMin: 0
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.machineType
+          toFieldPath: spec.forProvider.machineType
