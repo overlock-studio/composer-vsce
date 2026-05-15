@@ -16,5 +16,7 @@ export type ConfigFormat = {
   decoration?: FormatDecoration;
 };
 
-export const matchesFormat = (format: ConfigFormat, filename: string): boolean =>
-  format.filenamePatterns.includes(filename.toLowerCase());
+export const matchesFormat = (
+  format: ConfigFormat,
+  filename: string,
+): boolean => format.filenamePatterns.includes(filename.toLowerCase());
