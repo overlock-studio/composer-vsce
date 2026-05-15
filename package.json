@@ -2,7 +2,7 @@
   "name": "overlock-studio-composer-vsce",
   "displayName": "Overlock Studio Composer",
   "description": "Visual editor for configurations",
-  "version": "0.1.1",
+  "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "publisher": "OverlockStudio",
